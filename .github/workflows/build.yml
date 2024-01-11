@@ -17,5 +17,8 @@ jobs:
       - name: Export variables
         run: export SKIP_XCODE_VERSION_CHECK=1
 
-      - name: Execute build-toolchain
-        run: ./swift/utils/build-toolchain Hikari
+      - name: Configure and build LLVM and Clang
+        run: cmake -S llvm -B build -G "Xcode" -DCMAKE_BUILD_TYPE=Release
+
+      - name: Building LLVM
+        run: cmake --build build -j$(nproc)
