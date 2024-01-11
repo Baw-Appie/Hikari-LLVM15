@@ -22,3 +22,9 @@ jobs:
 
       - name: Building LLVM
         run: cmake --build build -j$(nproc)
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LLVM-Build
+          path: build
