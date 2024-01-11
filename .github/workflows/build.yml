@@ -1,0 +1,21 @@
+name: Automated Build
+
+on:
+  push:
+    branches: [ "llvm-swift-5.9-RELEASE" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Export variables
+        run: export SKIP_XCODE_VERSION_CHECK=1
+
+      - name: Execute build-toolchain
+        run: ./swift/utils/build-toolchain Hikari
